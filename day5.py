@@ -7,6 +7,8 @@ OPCODE4 = 4
 PARAM_MODE_0 = 0
 PARAM_MODE_1 = 1
 
+# DID NOT FINISH
+
 
 def do_computing(input, mode):
     # parameter is interpreted as a position
