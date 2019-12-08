@@ -31,6 +31,32 @@ def find_total_orbits(orbits):
     return sum_of_orbits
 
 
+def find_path(current, target, orbits):
+    path = []
+    if current == target:
+        path.append(current)
+        return path
+    else:
+        if current not in orbits:
+            return None
+        direct_children = orbits[current]
+        for child in direct_children:
+            paths = find_path(child, target, orbits)
+            if paths is not None:
+                paths.append(current)
+                return paths
+        return None
+
+
+def find_path_to_santa(start, end, orbits):
+    path_to_you = set(find_path("COM", start, orbits))
+    path_to_santa = set(find_path("COM", end, orbits))
+    hops = path_to_you.symmetric_difference(path_to_santa)
+    return len(hops) - 2
+
+
 if __name__ == "__main__":
     orbits = file_to_map()
     find_total_orbits(orbits)
+    path = find_path_to_santa("YOU", "SAN", orbits)
+    print(path)
